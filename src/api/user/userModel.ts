@@ -28,3 +28,14 @@ export const GetUserSchema = z.object({
   params: z.object({ id: commonValidations.id }),
   headers: z.object({ 'x-user-id': commonValidations.id }),
 });
+
+export const CreateUserSchema = z.object({
+  body: UserSchema.pick({
+    email: true,
+    username: true,
+    role: true,
+    authType: true,
+    walletAddress: true,
+    avatarUri: true,
+  }),
+});

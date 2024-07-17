@@ -35,4 +35,19 @@ export const userService = {
       return new ServiceResponse(ResponseStatus.Failed, errorMessage, null, StatusCodes.INTERNAL_SERVER_ERROR);
     }
   },
+
+  // Creates a new user
+  create: async (user: User): Promise<ServiceResponse<User | null>> => {
+    try {
+      const newUser = await userRepository.createAsync(user);
+      if (!newUser) {
+        return new ServiceResponse(ResponseStatus.Failed, 'User not created', null, StatusCodes.BAD_REQUEST);
+      }
+      return new ServiceResponse<User>(ResponseStatus.Success, 'User created', newUser, StatusCodes.CREATED);
+    } catch (ex) {
+      const errorMessage = `Error creating user: ${(ex as Error).message}`;
+      logger.error(errorMessage);
+      return new ServiceResponse(ResponseStatus.Failed, errorMessage, null, StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+  },
 };
