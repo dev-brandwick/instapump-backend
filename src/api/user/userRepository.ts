@@ -1,4 +1,4 @@
-import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
+import { GetCommand } from '@aws-sdk/lib-dynamodb';
 
 import { TABLE_NAME, User } from '@/api/user/userModel';
 import { docClient } from '@/common/helpers/database';
